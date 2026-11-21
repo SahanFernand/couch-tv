@@ -16,6 +16,8 @@
   --text-3: rgba(245, 245, 247, 0.42);
   --tile: #1c1c21;
   --warn: #ff9f8a;
+  --ui-accent: #5b5bd6;         /* the project's own brand indigo (README badge) - shared across the TV home and the remote. Never the nav focus ring, which stays white for 10-foot contrast */
+  --ui-accent-soft: rgba(91, 91, 214, 0.45);
 
   --safe-x: 5rem;        /* 80 */
   --safe-y: 3.75rem;     /* 60 */
@@ -35,7 +37,7 @@ html { font-size: calc(100vw / 120); background: var(--bg); color: var(--text); 
 body {
   width: 100vw; height: 100vh; overflow: hidden;
   background: var(--bg);
-  font-family: "Inter", system-ui, sans-serif; font-weight: 450;
+  font-family: "Inter", system-ui, sans-serif; font-weight: 400;
   -webkit-font-smoothing: antialiased; letter-spacing: -0.005em;
   cursor: none; user-select: none; -webkit-user-select: none;
 }
@@ -99,9 +101,9 @@ body {
   text-shadow: 0 0.125rem 1.5rem rgba(0, 0, 0, 0.35);
 }
 .clock { text-align: right; }
-.time { font-size: 7rem; line-height: 7rem; font-weight: 250; letter-spacing: -0.035em; font-variant-numeric: tabular-nums; }
+.time { font-size: 7rem; line-height: 7rem; font-weight: 300; letter-spacing: -0.035em; font-variant-numeric: tabular-nums; }
 .time small { font-size: 2.25rem; font-weight: 400; letter-spacing: 0; margin-left: 0.5rem; }
-.date { margin-top: 0.75rem; font-size: 1.875rem; line-height: 2.25rem; font-weight: 550; }
+.date { margin-top: 0.75rem; font-size: 1.875rem; line-height: 2.25rem; font-weight: 600; }
 .place { margin-top: 0.625rem; font-size: 1.4375rem; line-height: 1.875rem; color: rgba(255, 255, 255, 0.66); }
 /* quick buttons under the clock, like Apple TV's Control Centre */
 .quick { position: relative; display: flex; gap: 0.75rem; justify-content: flex-end; margin-top: 1.25rem; text-shadow: none; }
@@ -115,7 +117,7 @@ body {
 }
 .qbtn svg { width: 1.5rem; height: 1.5rem; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linejoin: round; }
 .qbtn svg .fill { fill: currentColor; stroke: none; }
-.qbtn.set { background: rgba(16, 16, 20, 0.66); box-shadow: inset 0 0 0 0.125rem rgba(255, 255, 255, 0.5); }
+.qbtn.set { background: rgba(16, 16, 20, 0.66); box-shadow: inset 0 0 0 0.125rem var(--ui-accent-soft); }
 .qbtn.off { color: rgba(255, 255, 255, 0.55); }
 .qbtn.focus { background: #fff; color: #111; transform: scale(1.08); box-shadow: 0 0.5rem 1.25rem rgba(0, 0, 0, 0.35); }
 /* the sleep choices: a short list straight under the Sleep timer button (app.js sets its right edge) */
@@ -154,7 +156,7 @@ body {
 
 /* ---------- Keep watching ---------- */
 .shelf-head { display: flex; align-items: baseline; justify-content: space-between; height: 2.25rem; margin-bottom: 1.25rem; }
-.shelf-head h2 { font-size: 1.875rem; line-height: 2.25rem; font-weight: 620; color: rgba(255, 255, 255, 0.82); letter-spacing: -0.01em; text-shadow: 0 0.125rem 1rem rgba(0, 0, 0, 0.4); }
+.shelf-head h2 { font-size: 1.875rem; line-height: 2.25rem; font-weight: 600; color: rgba(255, 255, 255, 0.82); letter-spacing: -0.01em; text-shadow: 0 0.125rem 1rem rgba(0, 0, 0, 0.4); }
 .status { font-size: 1.4375rem; color: var(--warn); }
 /* whose shows: one tab per person, like Apple TV's tab bar */
 .shelf-head { justify-content: flex-start; gap: 1.5rem; align-items: center; height: 3rem; }
@@ -166,7 +168,7 @@ body {
   font-size: 1.4375rem; line-height: 2.25rem; font-weight: 600; padding: 0 1.25rem; border-radius: 1.5rem;
   color: rgba(255, 255, 255, 0.78); transition: background 200ms var(--ease), color 200ms var(--ease), transform 200ms var(--ease);
 }
-.person.on { background: #fff; color: #111; }
+.person.on { background: var(--ui-accent); color: #fff; }
 .person.focus { transform: scale(1.08); box-shadow: 0 0 0 0.1875rem #fff, 0 0.5rem 1.25rem rgba(0, 0, 0, 0.35); }
 .person.focus:not(.on) { background: rgba(255, 255, 255, 0.16); color: #fff; }
 .shelf-none { font-size: 1.8125rem; line-height: var(--shelf-h); color: rgba(255, 255, 255, 0.7); text-shadow: 0 0.125rem 1rem rgba(0, 0, 0, 0.4); }
@@ -178,7 +180,7 @@ body {
 .shelf-track { display: flex; gap: var(--gap); transition: transform 280ms var(--ease); }
 .shelf-empty {
   max-width: 44rem; padding-top: 0.5rem;
-  font-size: 1.8125rem; line-height: 2.5rem; color: var(--text-3); font-weight: 450;
+  font-size: 1.8125rem; line-height: 2.5rem; color: var(--text-3); font-weight: 400;
 }
 
 /* ---------- tiles and the tvOS focus effect ---------- */
@@ -225,7 +227,7 @@ html.settled .tile.focus .face, html.settled .tile.focus .face::after { animatio
 }
 .show .badge img { width: 100%; height: 100%; object-fit: cover; }
 .show .bar { position: absolute; left: 0; right: 0; bottom: 0; height: 0.375rem; background: rgba(0, 0, 0, 0.45); }
-.show .bar i { display: block; height: 100%; background: var(--text); }
+.show .bar i { display: block; height: 100%; background: var(--ui-accent); }
 /* custom cards (home.custom_cards): the household's own cards at the end of the row, Classic look.
    On the Night look they are glass cards (.ncard) like the shows. */
 .ccard .face img { position: absolute; top: 0; left: 0; }
@@ -233,10 +235,10 @@ html.settled .tile.focus .face, html.settled .tile.focus .face::after { animatio
 .ccard.has-img .cwords { background: linear-gradient(to top, rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0)); padding-top: 2.5rem; }
 .ccard .cwords b, .ccard .cvalue { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--text); }
 .ccard .cwords b { font-size: 1.5rem; line-height: 1.875rem; font-weight: 600; color: var(--text-2); }
-.ccard .cvalue { font-size: 2.5rem; line-height: 3rem; font-weight: 650; letter-spacing: -0.01em; }
+.ccard .cvalue { font-size: 2.5rem; line-height: 3rem; font-weight: 600; letter-spacing: -0.01em; }
 .show .no-art {
   position: absolute; top: 0; right: 0; bottom: 0; left: 0; display: flex; align-items: center; justify-content: center; padding: 1.5rem;
-  font-size: 2.25rem; font-weight: 650; text-align: center; color: var(--text-2);
+  font-size: 2.25rem; font-weight: 600; text-align: center; color: var(--text-2);
 }
 .caption {
   position: absolute; left: 0; right: 0; top: calc(100% + 1.25rem); opacity: 0;
@@ -244,7 +246,7 @@ html.settled .tile.focus .face, html.settled .tile.focus .face::after { animatio
 }
 /* the focused show's title is shown large at the top instead */
 .show .caption { display: none; }
-.caption b { display: block; font-size: 1.8125rem; line-height: 2.25rem; font-weight: 620; color: var(--text); overflow: hidden; text-overflow: ellipsis; }
+.caption b { display: block; font-size: 1.8125rem; line-height: 2.25rem; font-weight: 600; color: var(--text); overflow: hidden; text-overflow: ellipsis; }
 .caption span { display: block; font-size: 1.4375rem; line-height: 1.875rem; color: var(--text-2); }
 
 /* ---------- apps ---------- */
@@ -271,7 +273,7 @@ html.lighter:not(.theme-night):not(.theme-loop) .apps { transition: none; }
 /* apps without a TV banner: their icon on a soft tile */
 .app .face.icon { display: flex; align-items: center; justify-content: center; }
 .app .face.icon img { width: 3.75rem; height: 3.75rem; border-radius: 0.875rem; object-fit: cover; }
-.app .face.word { display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 650; color: #fff; padding: 0 1rem; text-align: center; }
+.app .face.word { display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 600; color: #fff; padding: 0 1rem; text-align: center; }
 /* the house's own tiles: computer screen, settings */
 .app .face.tool {
   background: linear-gradient(160deg, #2c2c33 0%, #1a1a1f 100%);
@@ -415,7 +417,7 @@ html.still .tile.focus .face, html.still .tile.focus .face::after { animation: n
 .ncard b { display: block; margin-top: 0.375rem; font-size: 1.8125rem; line-height: 2.25rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .ncard i { display: block; font-style: normal; font-size: 1.3125rem; line-height: 1.75rem; color: rgba(255, 255, 255, 0.78); }
 .ncard .nbar { display: block; height: 0.3125rem; margin-top: 0.625rem; border-radius: 0.2rem; background: rgba(255, 255, 255, 0.25); overflow: hidden; }
-.ncard .nbar i { height: 100%; background: #fff; }
+.ncard .nbar i { height: 100%; background: var(--ui-accent); }
 .ncard.focus { transform: scale(1.05); box-shadow: 0 0 0 0.1875rem #fff, 0 1.25rem 2.5rem rgba(0, 0, 0, 0.45); }
 
 /* the dock */
@@ -546,7 +548,7 @@ html.still .tile.focus .face, html.still .tile.focus .face::after { animation: n
 /* the same card, centred just above the dock (clear of the clock), for the one-time updates question */
 .gear-pop.ask { left: 50%; top: auto; bottom: 14rem; width: 46rem; max-width: 46rem; transform: translateX(-50%); padding: 1.25rem; }
 .ask-h { padding: 0.75rem 1rem 1.25rem; }
-.ask-h b { display: block; font-size: 2rem; line-height: 2.5rem; font-weight: 640; color: #fff; }
+.ask-h b { display: block; font-size: 2rem; line-height: 2.5rem; font-weight: 600; color: #fff; }
 .ask-h small { display: block; margin-top: 0.5rem; font-size: 1.25rem; line-height: 1.75rem; color: rgba(255, 255, 255, 0.7); }
 /* the cards step aside while the menu is open, as they do for the move hint */
 .theme-night.gearing .shelf { opacity: 0; }
@@ -568,7 +570,7 @@ html.still .tile.focus .face, html.still .tile.focus .face::after { animation: n
 .grow + .grow { margin-top: 0.25rem; }
 .grow i { display: flex; flex: none; align-items: center; justify-content: center; width: 3.5rem; height: 3.5rem; border-radius: 1rem; background: rgba(255, 255, 255, 0.12); }
 .grow svg { width: 2rem; height: 2rem; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
-.grow b { display: block; font-size: 1.6875rem; line-height: 2.125rem; font-weight: 620; }
+.grow b { display: block; font-size: 1.6875rem; line-height: 2.125rem; font-weight: 600; }
 .grow small { display: block; font-size: 1.1875rem; line-height: 1.5rem; color: rgba(255, 255, 255, 0.62); }
 .grow.focus { background: #fff; color: #111; transform: scale(1.04); box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.35); }
 .grow.focus i { background: rgba(0, 0, 0, 0.07); }
@@ -605,7 +607,7 @@ html.still .tile.focus .face, html.still .tile.focus .face::after { animation: n
 
 .set-main { display: flex; flex-direction: column; min-width: 0; min-height: 0; }
 .set-crumb { height: 2rem; margin: 0.75rem 0 0 1.75rem; font-size: 1.3125rem; line-height: 2rem; font-weight: 600; color: rgba(255, 255, 255, 0.5); }
-.set-head { margin: 0.25rem 0 1.5rem 1.75rem; font-size: 2.375rem; line-height: 3rem; font-weight: 680; letter-spacing: -0.015em; }
+.set-head { margin: 0.25rem 0 1.5rem 1.75rem; font-size: 2.375rem; line-height: 3rem; font-weight: 700; letter-spacing: -0.015em; }
 .set-rows {
   position: relative; flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 0.5rem;
   margin: -1rem -1.75rem; padding: 1rem 1.75rem 3rem; overflow: hidden; scroll-behavior: smooth;
@@ -630,7 +632,7 @@ html.still .tile.focus .face, html.still .tile.focus .face::after { animation: n
 .srow.danger .sl b { color: #ff7b72; }
 .srow.danger.focus .sl b { color: #c4271b; }
 .srow.lifted { transform: scale(1.04) translateX(0.75rem); box-shadow: 0 1.25rem 2.5rem rgba(0, 0, 0, 0.5); animation: wiggle 0.32s ease-in-out infinite alternate; }
-.shead { flex: none; margin: 1.125rem 0 0.125rem 1.75rem; font-size: 1.25rem; line-height: 1.75rem; font-weight: 650; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255, 255, 255, 0.5); }
+.shead { flex: none; margin: 1.125rem 0 0.125rem 1.75rem; font-size: 1.25rem; line-height: 1.75rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255, 255, 255, 0.5); }
 .shead:first-child { margin-top: 0; }
 .smark { display: flex; flex: none; font-style: normal; }
 .smark svg { width: 1.875rem; height: 1.875rem; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
@@ -662,7 +664,7 @@ html.still .tile.focus .face, html.still .tile.focus .face::after { animation: n
   background: rgba(255, 255, 255, 0.12); color: #fff; font-size: 3.25rem; font-weight: 700; font-family: ui-monospace, Menlo, Consolas, monospace; }
 .scode-big i.dash { width: 2rem; background: none; color: rgba(255, 255, 255, 0.6); }
 .scode small { display: block; margin-top: 1rem; font-size: 1.4375rem; line-height: 2rem; color: rgba(255, 255, 255, 0.8); }
-.set-msg { flex: none; min-height: 2rem; margin: 1.5rem 0 0 1.75rem; font-size: 1.4375rem; line-height: 2rem; font-weight: 550; color: #8fd3ff; }
+.set-msg { flex: none; min-height: 2rem; margin: 1.5rem 0 0 1.75rem; font-size: 1.4375rem; line-height: 2rem; font-weight: 600; color: #8fd3ff; }
 .set-hint { flex: none; margin: 0.25rem 0 0 1.75rem; font-size: 1.25rem; line-height: 1.75rem; color: rgba(255, 255, 255, 0.5); }
 @media (prefers-reduced-motion: reduce) {
   .srow, .ssec, .grow { transition: none; }
@@ -681,7 +683,7 @@ html.still .tile.focus .face, html.still .tile.focus .face::after { animation: n
 .smart.on { display: flex; }
 .smarting .tile.focus .face, .smarting .tile.focus .face::after { animation: none; }
 .sh-title { margin: 2.25rem 0 1.75rem 0.25rem; font-size: 2.875rem; line-height: 3.75rem; font-weight: 700; letter-spacing: -0.022em; }
-.sh-head { margin: 0 0 1rem 0.25rem; font-size: 1.25rem; line-height: 1.75rem; font-weight: 650; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255, 255, 255, 0.5); }
+.sh-head { margin: 0 0 1rem 0.25rem; font-size: 1.25rem; line-height: 1.75rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255, 255, 255, 0.5); }
 .sh-note { margin: -0.25rem 0 1.25rem 0.25rem; font-size: 1.5rem; line-height: 2.125rem; color: var(--text-2); }
 .sh-note.warn { color: var(--warn); }
 .sh-view { overflow: hidden; margin: -1rem -1rem 1.75rem; padding: 1rem; }
@@ -691,7 +693,7 @@ html.still .tile.focus .face, html.still .tile.focus .face::after { animation: n
   box-shadow: inset 0 0 0 0.0625rem rgba(255, 255, 255, 0.1); transition: background 200ms var(--ease), transform 200ms var(--ease);
 }
 .sh-room.here { background: rgba(255, 255, 255, 0.14); }
-.sh-name { font-size: 1.875rem; line-height: 2.375rem; font-weight: 650; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sh-name { font-size: 1.875rem; line-height: 2.375rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .sh-dial { position: relative; width: 13.5rem; height: 13.5rem; margin: 0.75rem auto 0.25rem; }
 .sh-dial svg { width: 100%; height: 100%; transform: rotate(135deg); }
 .sh-dial .track { fill: none; stroke: rgba(255, 255, 255, 0.14); stroke-width: 8; stroke-linecap: round; }
@@ -727,7 +729,7 @@ html.still .tile.focus .face, html.still .tile.focus .face::after { animation: n
 .sh-scene b { min-width: 0; font-size: 1.625rem; line-height: 2.125rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .sh-scene.focus { background: #fff; color: #111; transform: scale(1.06); box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.45); }
 .sh-scene.focus i { background: rgba(0, 0, 0, 0.07); }
-.sh-msg { min-height: 2rem; margin: auto 0 0 0.25rem; font-size: 1.4375rem; line-height: 2rem; font-weight: 550; color: #8fd3ff; }
+.sh-msg { min-height: 2rem; margin: auto 0 0 0.25rem; font-size: 1.4375rem; line-height: 2rem; font-weight: 600; color: #8fd3ff; }
 .sh-hint { margin: 0.25rem 0 0 0.25rem; font-size: 1.25rem; line-height: 1.75rem; color: rgba(255, 255, 255, 0.5); }
 @media (prefers-reduced-motion: reduce) {
   .sh-b, .sh-scene, .sh-room, .sh-rooms, .sh-dial .arc { transition: none; }
@@ -1007,7 +1009,7 @@ html.still .tile.focus .face, html.still .tile.focus .face::after { animation: n
 .np-art svg { width: 2rem; height: 2rem; fill: none; stroke: rgba(255, 255, 255, 0.8); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
 .np-t { flex: 1; min-width: 0; }
 .np-app { display: block; font-size: 0.9375rem; line-height: 1.25rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255, 255, 255, 0.62); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.np-t b { display: block; margin-top: 0.125rem; font-size: 1.375rem; line-height: 1.75rem; font-weight: 620; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.np-t b { display: block; margin-top: 0.125rem; font-size: 1.375rem; line-height: 1.75rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .np-t small { display: block; font-size: 1.125rem; line-height: 1.5rem; color: rgba(255, 255, 255, 0.74); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .np-ctl { display: flex; flex: none; gap: 0.375rem; }
 .nb { display: flex; align-items: center; justify-content: center; width: 2.875rem; height: 2.875rem; border-radius: 50%; color: #fff; background: rgba(255, 255, 255, 0.1); transition: transform 220ms var(--ease), background 220ms var(--ease), color 220ms var(--ease); }
@@ -1782,7 +1784,7 @@ html:not(.kids-on) .kids { display: none; }
 .ktop { display: flex; align-items: center; justify-content: space-between; flex: none; }
 .kwho { display: flex; align-items: center; }
 .kwho .avatar { width: 5rem; height: 5rem; font-size: 2.375rem; background: var(--kid) !important; margin-right: 1.5rem; }
-.kwho b { display: block; font-size: 3rem; line-height: 1.1; font-weight: 750; letter-spacing: -0.02em; }
+.kwho b { display: block; font-size: 3rem; line-height: 1.1; font-weight: 700; letter-spacing: -0.02em; }
 .kwho small { display: block; font-size: 1.5rem; color: var(--text-2); margin-top: 0.25rem; }
 .kright { display: flex; align-items: center; }
 .ktime { font-size: 2.5rem; font-weight: 600; letter-spacing: -0.02em; margin-right: 2rem; font-variant-numeric: tabular-nums; }
@@ -1807,7 +1809,7 @@ html:not(.kids-on) .kids { display: none; }
   transition: box-shadow 240ms var(--ease);
 }
 .kposter img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
-.kword { position: absolute; left: 1.5rem; right: 1.5rem; bottom: 1.75rem; font-size: 2.25rem; font-weight: 750; line-height: 1.1; }
+.kword { position: absolute; left: 1.5rem; right: 1.5rem; bottom: 1.75rem; font-size: 2.25rem; font-weight: 700; line-height: 1.1; }
 .kposter img + .kword { display: none; }
 .kbadge {
   position: absolute; left: 1rem; top: 1rem; width: 3.25rem; height: 3.25rem; border-radius: 0.875rem; overflow: hidden;
@@ -1841,7 +1843,7 @@ html:not(.kids-on) .kids { display: none; }
   background: linear-gradient(170deg, #2a2f52, #1d2140); box-shadow: 0 2.5rem 6rem rgba(0, 0, 0, 0.55), inset 0 0 0 0.0625rem rgba(255, 255, 255, 0.12);
 }
 .kpin-lock { display: block; width: 3rem; height: 3rem; margin: 0 auto 1rem; color: var(--text-2); }
-.kpin-card h2 { font-size: 2.25rem; font-weight: 750; letter-spacing: -0.01em; }
+.kpin-card h2 { font-size: 2.25rem; font-weight: 700; letter-spacing: -0.01em; }
 .kpin-card p { font-size: 1.375rem; color: var(--text-2); margin-top: 0.5rem; line-height: 1.35; }
 .kdots { display: flex; justify-content: center; margin: 1.75rem 0 1.5rem; height: 1.25rem; }
 .kdots i { width: 1.25rem; height: 1.25rem; border-radius: 50%; margin: 0 0.5rem; box-shadow: inset 0 0 0 0.1875rem rgba(255, 255, 255, 0.45); }
